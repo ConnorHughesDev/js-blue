@@ -3,6 +3,8 @@ const Express = require('express'); //Here we require the use of the 'express' n
 const app = Express(); //We create an instance of express. We're actually firing off a top-level 'express' function, a function exported by the Express module. This allows us to create an Express app.
 const dbConnection = require("./db");
 
+app.use(require("./middleware/headers"));
+
 const controllers = require("./controllers");
 
 app.use(Express.json());

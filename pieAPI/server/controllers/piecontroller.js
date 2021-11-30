@@ -1,8 +1,18 @@
 // const Express = require("express")
 // const router = Express.Router()
+const { response } = require("express")
 const { PieModel } = require("../models")
+const { validateSession } = require("../middleware")
 
 const router = require("express").Router()
+
+/*
+    CRUD Notes
+        Create --> POST (has body)
+        Read --> GET (no body)
+        Update --> PUT (has body)
+        Delete --> DELETE (no body)
+*/
 
 //! GET ALL
 router.get("/", async (req, res) => {
@@ -93,6 +103,34 @@ router.get("/:name", async (req, res) => {
 //         )
 //     }
 // })
+
+router.put("/:id", async (req, res) => {
+    const {
+        nameOfPie,
+        baseOfPie,
+        crust,
+        timeToBake,
+        servings,
+        rating
+    } = req.body
+
+    try {
+        const pieUpdate = await PieModel.update(
+            { nameOfPie, baseOfPie, crust, timeToBake, servings, rating },
+            { where:  {id: req.params.id}}
+        )
+
+        res.status(200).json({
+            message: "Pie updated",
+            pieUpdate
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: "Failed to update pie",
+            error: err
+        })
+    } 
+})
 
 //! DELETE
 router.delete("/:id", async (req, res) => {
