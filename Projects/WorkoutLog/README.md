@@ -1,4 +1,4 @@
-# WD-workoutLog
+# WorkoutLog
 
 #### POST | /user/register | Create user with username/login.
 <img src= "assets/UserRegister.JPG" width = 100%>
