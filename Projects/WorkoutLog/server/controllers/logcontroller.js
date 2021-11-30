@@ -34,7 +34,7 @@ router.post('/', validateJWT, async (req, res) => {
 });
 
 // //! GET all entries
-router.get("/:all", async (req, res) => {
+router.get("/all", async (req, res) => {
     try {
         const entries = await LogModel.findAll();
         res.status(200).json(entries);
@@ -60,17 +60,38 @@ router.get("/", validateJWT, async (req, res) => {
 });
 
 //! GET log by id for user
+// router.get("/:id", async (req, res) => {
+//     const { id } = req.params;
+//     try {
+//         const results = await LogModel.findOne({
+//             where: { id: id }
+//         });
+//         res.status(200).json(results);
+//     } catch (err) {
+//         res.status(500).json({ error: err });
+//     }
+// });
+
 router.get("/:id", async (req, res) => {
-    const { id } = req.params;
+    // const { id } = req.params
     try {
-        const results = await LogModel.findOne({
-            where: { id: id }
-        });
-        res.status(200).json(results);
+        const locatedLog = await LogModel.findOne({
+            where: {
+                owner: req.user.id,
+                id: req.params.id
+            },
+            
+        })
+        res.status(200).json({
+            message: "Log successfully retrieved",
+            locatedLog
+        })
     } catch (err) {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+            message: `Failed to retrieve Logs: ${err}`
+        })
     }
-});
+})
 
 //! PUT updating a Log entry
 router.put("/:logId", validateJWT, async (req, res) => {
@@ -86,9 +107,9 @@ router.put("/:logId", validateJWT, async (req, res) => {
     };
 
     const updatedLog = {
-        description: description,
-        definition: definition,
-        result: result
+        description,
+        definition,
+        result
     };
 
     try {
