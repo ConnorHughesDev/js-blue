@@ -1,31 +1,25 @@
 # WD-workoutLog
 
-## Please see below for images of endpoint & tokens, etc.
+#### POST | /user/register | Create user with username/login.
+<img src= "assets/UserRegister.JPG" width = 100%>
 
-### Endpoints:
-Endpoint | Verb | Description
--------- | ---- | -----------
+#### POST | /user/login | Log in with an existing user.
+<img src= "assets/UserLogin.JPG" width = 100%>
 
-#### 1. /user/register | POST | Allows a new user to be created with a username and password.
-<img src= "assets/UserRegister.JPG" width = 80%>
+#### POST | /log/ | Create Log..
+<img src= "assets/CreateLog.JPG" width = 100%>
 
-#### 2. /user/login | POST | Allows log in with an existing user.
-<img src= "images/logUserLogin.jpg" width = 80%>
+#### GET | /log/ | Gets all logs for user.
+<img src= "assets/GetLogsByUser.JPG" width = 100%>
 
-#### 3. /log/ | POST | Allows users to create a workout log with descriptions, definitions, results, and owner properties.
-<img src= "images/logCreate2.jpg" width = 80%>
+#### GET | /log/:id | Gets individual logs by id for user.
+<img src= "assets/UserLogByID.JPG" width = 100%>
 
-#### 4. /log/ | GET | Gets all logs for an individual user.
-<img src= "images/getMyLogEntries.jpg" width = 80%>
+#### PUT | /log/:id | Update log by user.
+<img src= "assets/UpdateUserLog.JPG" width = 100%>
 
-#### 5. /log/:id | GET | Gets individual logs by id for an individual user.
-<img src= "images/getLogsByUserId.jpg" width = 80%>
+#### DELETE | /log/:id | Delete user log by id.
+<img src= "assets/DeleteLog.JPG" width = 100%>
 
-#### 6. /log/:id |	PUT | Allows individual logs to be updated by a user.
-<img src= "images/putLogByLogId.jpg" width = 80%>
-
-#### 7. /log/:id |	DELETE | Allows individual logs to be deleted by a user.
-<img src= "images/DelLogByLogId2.jpg" width = 80%>
-
-#### 8. /log/all |	GET | Gets all logs. Demonstrating additional endpoint and that must have a token to access.
-<img src= "images/getAllLogs-NotAuth.jpg" width = 80%>
+#### GET | /log/all | Gets all logs.
+<img src= "GetAllLogs.JPG" width = 80%>

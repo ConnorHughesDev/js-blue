@@ -12,7 +12,7 @@ router.get('/practice', validateJWT, (req, res) => {
 // })
 
 //! create log
-router.post('/create', validateJWT, async (req, res) => {
+router.post('/', validateJWT, async (req, res) => {
     // console.log(req.body.log)
     // console.log(req.user)
     const { description, definition, result } = req.body.log;
@@ -34,18 +34,18 @@ router.post('/create', validateJWT, async (req, res) => {
 });
 
 // //! GET all entries
-// router.get("/", async (req, res) => {
-//     try {
-//         const entries = await LogModel.findAll();
-//         res.status(200).json(entries);
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
+router.get("/:all", async (req, res) => {
+    try {
+        const entries = await LogModel.findAll();
+        res.status(200).json(entries);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 
 //! GET all logs for user
-router.get("/mine", validateJWT, async (req, res) => {
+router.get("/", validateJWT, async (req, res) => {
     let { id } = req.user;
     try {
         const userLogs = await LogModel.findAll({
@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
 });
 
 //! PUT updating a Log entry
-router.put("/update/:logId", validateJWT, async (req, res) => {
+router.put("/:logId", validateJWT, async (req, res) => {
     const { description, definition, result } = req.body.log;
     const logId = req.params.logId;
     const userId = req.user.id;
@@ -93,14 +93,23 @@ router.put("/update/:logId", validateJWT, async (req, res) => {
 
     try {
         const update = await LogModel.update(updatedLog, query);
-        res.status(200).json(update);
-    } catch (err) {
-        res.status(500).json({ error: err });
+    //     res.status(200).json(update);
+    // } catch (err) {
+    //     res.status(500).json({ error: err });
+    res.status(200).json({
+        message: "Log updated",
+        update
+    })
+} catch (err) {
+    res.status(500).json({
+        message: "Failed to update Log",
+        error: err
+    })
     }
 });
 
 // //! DELETE a Log
-router.delete("/delete/:id", validateJWT, async (req, res) => {
+router.delete("/:id", validateJWT, async (req, res) => {
     try {
         await LogModel.destroy({
             where: {
