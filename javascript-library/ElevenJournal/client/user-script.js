@@ -26,7 +26,7 @@ function userSignUp() {
         .then(data => {
             console.log(data);
             let token = data.sessionToken;
-            localStorage.setItem('SessionToken', token);
+            localStorage.setItem('sessionToken', token);
             tokenChecker();
         })
         .catch(err => {
@@ -61,7 +61,7 @@ function userLogin() {
         .then(data => {
             console.log(data)
             let token = data.sessionToken;
-            localStorage.setItem('SessionToken', token);
+            localStorage.setItem('sessionToken', token);
             tokenChecker();
         })
         .catch(err => {
@@ -84,5 +84,22 @@ function userLogout() {
 ************************** */
 function tokenChecker() {
     console.log('tokenChecker Function Called')
+
+    let display = document.getElementById('journals');
+    let header = document.createElement('h5');
+    let accessToken = localStorage.getItem('sessionToken');
+    let alertText = "Log in or sign up to get started!";
+
+    for (let i = 0; i < display.childNodes.length; i++) {
+        display.removeChild(display.firstChild);
+    }
+
+    if (accessToken === 'undefined') {
+        display.appendChild(header);
+        header.textContent = alertText;
+        header.setAttribute('id', 'defaultLogin');
+    } else {
+        null
+    }
 }
 tokenChecker()

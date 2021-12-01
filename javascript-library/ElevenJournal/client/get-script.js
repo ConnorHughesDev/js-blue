@@ -4,7 +4,7 @@
 
 function displayMine() {
     console.log('displayMine Function Called')
-    const accessToken = localStorage.getItem('SessionToken');
+    const accessToken = localStorage.getItem('sessionToken');
 
     fetch(`http://localhost:3000/journal/mine`, {
         method: "GET",
