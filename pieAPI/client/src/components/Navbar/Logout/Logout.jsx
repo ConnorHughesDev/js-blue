@@ -10,7 +10,7 @@ const Logout = props => {
             <img src={logoutPic}
             alt="power button" 
             id="logout" 
-            class="logout"
+            className="logout"
             onClick={props.clearSession} />
         </div>
     )

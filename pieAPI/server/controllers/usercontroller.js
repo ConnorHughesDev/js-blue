@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
         res.status(201).json({
             message: "User registered",
             user: newUser,
-            token
+            token: `Bearer ${token}`
         })
     } catch (err) {
         // if (err.name === "SequelizeUniqueConstriantError")  //may need to use this as the devs ran an update and instance of doesnt work with unique constraint error
@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
                 res.status(200).json({
                     user: loginUser,
                     message: "User successfully logged in!",
-                    token
+                    token: `Bearer ${token}`
                 });
             } else {
                 res.status(401).json({

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react"
 
@@ -12,7 +11,7 @@ function App() {
   // useState accepts two values
   // State variable with initial value passed inside useState()
   // setState or set[state var name] - means of changing our state variable
-  const [ count, setCount ] = useState(0)
+  // const [ count, setCount ] = useState(0)
   const [ sessionToken, setSessionToken ] = useState(undefined)
   console.log(sessionToken)
 
@@ -34,7 +33,7 @@ function App() {
 
   const viewConductor = () => {
     return sessionToken !== undefined ?
-    <Pies /> : <Auth updateLocalStorage={updateLocalStorage} />
+    <Pies sessionToken={sessionToken} /> : <Auth updateLocalStorage={updateLocalStorage} />
   }
 
   
